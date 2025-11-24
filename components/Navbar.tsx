@@ -38,9 +38,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView }) => {
               className="flex-shrink-0 flex items-center cursor-pointer gap-2"
               onClick={() => handleNavClick('home')}
             >
-              <div className="bg-brand-600 p-1.5 rounded-lg text-white">
-                <Cpu size={24} />
-              </div>
+              <img src="/favicon.png" alt="Logo" className="w-16 h-16 rounded-lg" />
               <span className="font-bold text-xl tracking-tight text-slate-800">
                 Vox<span className="text-brand-600">Factum</span>
               </span>
@@ -95,9 +93,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView }) => {
           {/* Drawer Header */}
           <div className="flex items-center justify-between p-5 border-b border-slate-100 bg-slate-50/50">
              <div className="flex items-center gap-2">
-                <div className="bg-brand-600 p-1 rounded-md text-white">
-                  <Cpu size={18} />
-                </div>
+                <img src="/favicon.png" alt="Logo" className="w-16 h-16 rounded-md" />
                 <span className="font-bold text-lg text-slate-800">Menu</span>
              </div>
             <button 
@@ -136,7 +132,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView }) => {
               Hubungi Saya
             </button>
             <p className="text-center text-[10px] text-slate-400 mt-6 uppercase tracking-wider font-semibold">
-              &copy; {new Date().getFullYear()} Niyar.AI Portfolio
+              &copy; {new Date().getFullYear()} Nizar.AI Portfolio
             </p>
           </div>
       </div>

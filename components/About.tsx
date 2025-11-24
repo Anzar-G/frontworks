@@ -25,7 +25,7 @@ const About: React.FC = () => {
                 <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                 <div className="w-3 h-3 rounded-full bg-green-500"></div>
               </div>
-              <p><span className="text-purple-400">const</span> <span className="text-yellow-300">muhammadNiyar</span> = <span className="text-purple-400">new</span> <span className="text-blue-400">AI_Engineer</span>({'{'} </p>
+              <p><span className="text-purple-400">const</span> <span className="text-yellow-300">muhammadNizar</span> = <span className="text-purple-400">new</span> <span className="text-blue-400">AI_Engineer</span>({'{'} </p>
               <p className="pl-4">focus: <span className="text-green-400">['Frontend', 'UX', 'AI']</span>,</p>
               <p className="pl-4">passion: <span className="text-green-400">'Humanizing Data'</span>,</p>
               <p className="pl-4">status: <span className="text-blue-300">OPEN_TO_WORK</span></p>
@@ -42,7 +42,7 @@ const About: React.FC = () => {
               Tentang Saya
             </h2>
             <p className="text-lg text-slate-600 mb-6 leading-relaxed">
-              Halo! Saya <span className="font-bold text-slate-900">Muhammad Niyar</span>. Perjalanan saya dimulai dari ketertarikan mendalam pada Artificial Intelligence, namun saya menyadari satu hal: <span className="italic">Model AI terhebat sekalipun tidak berguna jika sulit digunakan oleh manusia.</span>
+              Halo! Saya <span className="font-bold text-slate-900">Muhammad Nizar</span>. Perjalanan saya dimulai dari ketertarikan mendalam pada Artificial Intelligence, namun saya menyadari satu hal: <span className="italic">Model AI terhebat sekalipun tidak berguna jika sulit digunakan oleh manusia.</span>
             </p>
             <p className="text-lg text-slate-600 mb-8 leading-relaxed">
               Itulah mengapa saya beralih fokus menjadi Frontend Engineer dengan perspektif AI. Saya tidak hanya menulis kode UI; saya memahami logika data di belakangnya. Saya menciptakan jembatan visual yang membuat teknologi kompleks terasa sederhana.

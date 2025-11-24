@@ -10,8 +10,8 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
   const [isShareOpen, setIsShareOpen] = useState(false);
 
   const handleShare = (platform: string) => {
-    const url = window.location.href;
-    const text = "Cek portfolio Muhammad Niyar, AI Frontend Engineer keren ini!";
+  const url = window.location.href;
+  const text = "Cek portfolio Muhammad Nizar, AI Frontend Engineer keren ini!";
     const encodedUrl = encodeURIComponent(url);
     const encodedText = encodeURIComponent(text);
 
