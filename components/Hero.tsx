@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FloatingLines from './FloatingLines';
 import { ArrowRight, Code, Database, Share2, Facebook, Instagram, Link as LinkIcon, MessageCircle, X } from 'lucide-react';
 import { ViewState } from '../types';
 
@@ -110,14 +111,32 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-slate-50 pt-16 pb-20 lg:pt-32 lg:pb-28">
+  <section className="relative overflow-hidden bg-slate-50 min-h-screen flex items-center">
+      {/* Gradient transition ke section berikutnya */}
+  {/* Gradient overlay menutupi section di bawah Hero */}
+  <div className="pointer-events-none fixed left-0 bottom-0 w-full h-[40vh] z-[9999]" style={{background: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, #111 100%)', pointerEvents: 'none'}} />
+      {/* FloatingLines background animasi */}
+  <div style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 1 }}>
+        <FloatingLines 
+          linesGradient={['#e947f5', '#2f4ba2']}
+          enabledWaves={['top', 'middle', 'bottom']}
+          lineCount={[5, 8, 10]} // lebih sedikit garis
+          lineDistance={[10, 8, 6]} // jarak lebih besar
+          topWavePosition={{ x: 10.0, y: 0.5, rotate: -0.4 }}
+          middleWavePosition={{ x: 5.0, y: 0.0, rotate: 0.2 }}
+          bendRadius={5.0}
+          bendStrength={-0.5}
+          interactive={false} // matikan interaktif
+          parallax={false} // matikan parallax
+        />
+      </div>
+
       {/* Decorative blobs */}
       <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-brand-200 opacity-30 blur-3xl filter animate-pulse"></div>
       <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 rounded-full bg-accent-200 opacity-30 blur-3xl filter"></div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left z-10">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          
           {/* Text Content */}
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 text-brand-800 text-xs font-semibold tracking-wide uppercase">
@@ -125,11 +144,11 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
               AI Engineer & Frontend Expert
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
-              Mewujudkan Logika AI Menjadi <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-accent-500">Antarmuka Memukau</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight drop-shadow-[0_2px_8px_rgba(255,255,255,0.35)]">
+              <span className="text-white drop-shadow-[0_2px_8px_rgba(255,255,255,0.35)]">Mewujudkan Logika AI Menjadi</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-accent-500">Antarmuka Memukau</span>
             </h1>
             
-            <p className="text-lg text-slate-600 max-w-2xl leading-relaxed">
+            <p className="text-lg text-white max-w-2xl leading-relaxed">
               Saya membantu bisnis menerjemahkan model AI yang kompleks menjadi aplikasi web yang intuitif, cepat, dan estetik. Fokus pada pengalaman pengguna tanpa mengorbankan kecerdasan sistem.
             </p>
 
