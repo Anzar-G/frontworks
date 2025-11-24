@@ -175,7 +175,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView, theme, setTheme, 
               Hubungi Saya
             </button>
             <p className="text-center text-[10px] text-slate-400 mt-6 uppercase tracking-wider font-semibold">
-              &copy; {new Date().getFullYear()} Nizar.AI Portfolio
+              &copy; {new Date().getFullYear()} VoxFactum
             </p>
           </div>
       </div>
