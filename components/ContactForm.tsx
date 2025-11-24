@@ -54,7 +54,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ initialServiceType }) => {
   }, [formData.serviceType]);
 
   const [errors, setErrors] = useState<Partial<ContactFormData> & { terms?: string }>({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const validate = (): boolean => {
     let tempErrors: Partial<ContactFormData> & { terms?: string } = {};
@@ -109,8 +108,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ initialServiceType }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
-      // Simulate API call/processing
-      setIsSubmitted(true);
+      handleWhatsAppRedirect();
     }
   };
 
@@ -144,13 +142,12 @@ const ContactForm: React.FC<ContactFormProps> = ({ initialServiceType }) => {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white">Mulai Proyek Anda</h2>
           <p className="mt-4 text-lg text-slate-500 dark:text-slate-300">
-            Isi formulir di bawah ini untuk konsultasi awal. Tombol WhatsApp akan muncul setelah data tervalidasi.
+            Isi formulir di bawah ini untuk konsultasi awal. Setelah data tervalidasi, Anda akan langsung diarahkan ke WhatsApp.
           </p>
         </div>
 
         <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-100 dark:border-slate-800">
-          {!isSubmitted ? (
-            <form onSubmit={handleSubmit} className="p-8 sm:p-10 space-y-6">
+          <form onSubmit={handleSubmit} className="p-8 sm:p-10 space-y-6">
               
               {/* Name Field */}
               <div>
@@ -275,33 +272,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ initialServiceType }) => {
                 <Send size={18} />
                 Kirim & Validasi
               </button>
-            </form>
-          ) : (
-            <div className="p-10 text-center animate-fade-in-up">
-              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <CheckCircle className="text-green-600 w-10 h-10" />
-              </div>
-              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Terima Kasih, {formData.name}!</h3>
-              <p className="text-slate-600 dark:text-slate-300 mb-8">
-                Formulir anda telah berhasil divalidasi. Silakan klik tombol di bawah untuk melanjutkan diskusi langsung via WhatsApp dengan data yang sudah terisi.
-              </p>
-              
-              <button
-                onClick={handleWhatsAppRedirect}
-                className="w-full bg-[#25D366] text-white font-bold py-4 rounded-lg hover:bg-[#20bd5a] transition-colors shadow-lg flex justify-center items-center gap-2 transform hover:scale-[1.02] duration-200"
-              >
-                <MessageSquare size={20} />
-                Lanjut ke WhatsApp
-              </button>
-              
-              <button 
-                onClick={() => setIsSubmitted(false)}
-                className="mt-6 text-slate-400 hover:text-slate-600 text-sm underline"
-              >
-                Edit Formulir
-              </button>
-            </div>
-          )}
+          </form>
         </div>
       </div>
       <TermsModal
