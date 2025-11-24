@@ -45,4 +45,4 @@ export interface PricingPackage {
   buttonText: string;
 }
 
-export type ViewState = 'home' | 'services' | 'portfolio' | 'about' | 'contact';
+export type ViewState = 'home' | 'services' | 'portfolio' | 'about' | 'contact' | 'search';

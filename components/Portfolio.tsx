@@ -1,26 +1,48 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { PROJECTS } from '../constants';
 import { Project } from '../types';
 import { ExternalLink, Globe, Layers, AlertCircle } from 'lucide-react';
 
-const Portfolio: React.FC = () => {
+interface PortfolioProps {
+  searchQuery?: string;
+}
+
+const Portfolio: React.FC<PortfolioProps> = ({ searchQuery = '' }) => {
   const [filter, setFilter] = useState('All');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const categories = ['All', ...Array.from(new Set(PROJECTS.map(p => p.category)))];
 
-  const filteredProjects = filter === 'All' 
-    ? PROJECTS 
-    : PROJECTS.filter(p => p.category === filter);
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+
+  const filteredProjects = useMemo(() => {
+    const byCategory = filter === 'All'
+      ? PROJECTS
+      : PROJECTS.filter(p => p.category === filter);
+
+    if (!normalizedQuery) return byCategory;
+
+    return byCategory.filter((p) => {
+      const haystack = [
+        p.title,
+        p.description,
+        p.category,
+        ...(p.techStack || []),
+      ]
+        .join(' ')
+        .toLowerCase();
+      return haystack.includes(normalizedQuery);
+    });
+  }, [filter, normalizedQuery]);
 
   const isDetailMode = !!selectedProject;
 
   return (
-    <section className="py-20 bg-slate-50">
+    <section className="py-20 bg-slate-50 dark:bg-slate-950 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h2 className="text-base text-brand-600 font-semibold tracking-wide uppercase">Portofolio</h2>
-          <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          <h2 className="text-base text-brand-600 dark:text-brand-400 font-semibold tracking-wide uppercase">Portofolio</h2>
+          <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
             {isDetailMode ? 'Detail Proyek' : 'Karya & Hasil Proyek'}
           </p>
         </div>
@@ -35,7 +57,7 @@ const Portfolio: React.FC = () => {
                 className={`px-5 py-3 md:py-2.5 rounded-full text-sm font-medium transition-all duration-300 transform min-w-[80px] ${
                   filter === cat
                     ? 'bg-brand-600 text-white shadow-lg scale-105'
-                    : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 hover:scale-105'
+                    : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:scale-105'
                 }`}
               >
                 {cat}
@@ -86,7 +108,7 @@ const Portfolio: React.FC = () => {
 
         {/* Detail Mode */}
         {isDetailMode && selectedProject && (
-          <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden animate-[fadeIn_0.3s_ease-out]">
+          <div className="max-w-3xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden animate-[fadeIn_0.3s_ease-out]">
             {/* Header image */}
             <div className="relative max-h-[360px] sm:max-h-[420px] overflow-hidden">
               <img
@@ -107,29 +129,29 @@ const Portfolio: React.FC = () => {
             <div className="px-6 pt-6 pb-8">
               <button
                 type="button"
-                className="mb-4 inline-flex items-center text-xs font-medium text-slate-500 hover:text-slate-700"
+                className="mb-4 inline-flex items-center text-xs font-medium text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
                 onClick={() => setSelectedProject(null)}
               >
                 ← Kembali ke daftar proyek
               </button>
 
-              <h3 className="text-2xl font-bold text-slate-900 mb-3">
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">
                 {selectedProject.title}
               </h3>
 
               <div className="flex flex-wrap gap-2 mb-6">
                 {selectedProject.techStack.map((tech) => (
-                  <span key={tech} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200">
+                  <span key={tech} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
                     <Layers size={12} className="text-brand-500" />
                     {tech}
                   </span>
                 ))}
               </div>
 
-              <div className="prose prose-slate prose-sm max-w-none text-slate-600 mb-8 leading-relaxed">
+              <div className="prose prose-slate prose-sm max-w-none text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
                 <p>{selectedProject.description}</p>
                 {selectedProject.highlight && (
-                  <div className="mt-4 p-4 bg-slate-50 rounded-lg border border-slate-100 text-xs text-slate-500 italic">
+                  <div className="mt-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700 text-xs text-slate-500 dark:text-slate-300 italic">
                     <span className="font-semibold text-brand-600 not-italic">Highlight:</span> {selectedProject.highlight}
                   </div>
                 )}
@@ -149,7 +171,7 @@ const Portfolio: React.FC = () => {
                 ) : (
                   <button
                     disabled
-                    className="flex-1 inline-flex justify-center items-center px-4 py-3 border border-slate-200 text-sm font-medium rounded-xl text-slate-400 bg-slate-50 cursor-not-allowed min-h-[48px]"
+                    className="flex-1 inline-flex justify-center items-center px-4 py-3 border border-slate-200 dark:border-slate-600 text-sm font-medium rounded-xl text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-900 cursor-not-allowed min-h-[48px]"
                   >
                     <AlertCircle className="mr-2 h-5 w-5" />
                     Demo Tidak Tersedia
@@ -158,7 +180,7 @@ const Portfolio: React.FC = () => {
 
                 <button
                   type="button"
-                  className="flex-1 inline-flex justify-center items-center px-4 py-3 border border-slate-300 shadow-sm text-sm font-medium rounded-xl text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 transition-colors min-h-[48px]"
+                  className="flex-1 inline-flex justify-center items-center px-4 py-3 border border-slate-300 dark:border-slate-600 shadow-sm text-sm font-medium rounded-xl text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 transition-colors min-h-[48px]"
                   onClick={() => setSelectedProject(null)}
                 >
                   Kembali ke Portofolio
@@ -181,7 +203,7 @@ const ProjectCard: React.FC<{
 }> = ({ project, isMobile, onViewDetail }) => {
   return (
     <div 
-      className={`group bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 h-full flex flex-col 
+      className={`group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700 h-full flex flex-col 
       transform transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-xl ${isMobile ? 'mx-0' : ''}`}
     >
       {/* 
@@ -209,10 +231,10 @@ const ProjectCard: React.FC<{
       
       <div className="p-5 md:p-6 flex-1 flex flex-col">
         {/* Title emphasizes focus */}
-        <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">
+        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-brand-600 transition-colors">
           {project.title}
         </h3>
-        <p className="text-slate-600 text-sm mb-5 line-clamp-3 flex-1 leading-relaxed">
+        <p className="text-slate-600 dark:text-slate-300 text-sm mb-5 line-clamp-3 flex-1 leading-relaxed">
           {project.description}
         </p>
         
@@ -220,7 +242,7 @@ const ProjectCard: React.FC<{
           <div className="flex flex-wrap gap-2">
             {project.techStack.map((tech) => (
               <div key={tech} className="relative group/tooltip">
-                <span className="px-2.5 py-1 bg-slate-50 border border-slate-100 text-slate-600 text-[10px] font-semibold rounded-md uppercase tracking-wider hover:bg-brand-50 hover:text-brand-600 hover:border-brand-200 transition-colors cursor-default">
+                <span className="px-2.5 py-1 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 text-slate-600 dark:text-slate-200 text-[10px] font-semibold rounded-md uppercase tracking-wider hover:bg-brand-50 hover:text-brand-600 hover:border-brand-200 transition-colors cursor-default">
                   {tech}
                 </span>
                 {/* Tooltip */}
@@ -234,7 +256,7 @@ const ProjectCard: React.FC<{
           
           <button 
             onClick={onViewDetail}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 md:py-2.5 border border-slate-200 text-slate-600 text-sm font-medium rounded-xl hover:bg-brand-600 hover:text-white hover:border-brand-600 transition-all active:scale-95 min-h-[44px]"
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 md:py-2.5 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-200 text-sm font-medium rounded-xl hover:bg-brand-600 hover:text-white hover:border-brand-600 transition-all active:scale-95 min-h-[44px]"
           >
             Lihat Detail <ExternalLink size={14} />
           </button>

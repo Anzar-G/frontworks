@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
-import { Menu, X, Cpu, ChevronRight } from 'lucide-react';
+import { Menu, X, Cpu, ChevronRight, Sun, Moon, Home, FolderGit2, Info, PhoneCall } from 'lucide-react';
 import { ViewState } from '../types';
 import { useLockedBody } from '../useLockedBody';
 
 interface NavbarProps {
   currentView: ViewState;
   setView: (view: ViewState) => void;
+  theme: 'light' | 'dark';
+  setTheme: (theme: 'light' | 'dark') => void;
+  searchQuery: string;
+  setSearchQuery: (value: string) => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ currentView, setView }) => {
+const Navbar: React.FC<NavbarProps> = ({ currentView, setView, theme, setTheme, searchQuery, setSearchQuery }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navLinks: { id: ViewState; label: string }[] = [
-    { id: 'home', label: 'Beranda' },
-    { id: 'services', label: 'Layanan' },
-    { id: 'portfolio', label: 'Portofolio' },
-    { id: 'about', label: 'Tentang Saya' },
-    { id: 'contact', label: 'Kontak' },
+  const navLinks: { id: ViewState; label: string; icon: React.ReactNode }[] = [
+    { id: 'home', label: 'Beranda', icon: <Home className="w-4 h-4" /> },
+    { id: 'services', label: 'Layanan', icon: <Cpu className="w-4 h-4" /> },
+    { id: 'portfolio', label: 'Portofolio', icon: <FolderGit2 className="w-4 h-4" /> },
+    { id: 'about', label: 'Tentang Saya', icon: <Info className="w-4 h-4" /> },
+    { id: 'contact', label: 'Kontak', icon: <PhoneCall className="w-4 h-4" /> },
   ];
 
   const handleNavClick = (view: ViewState) => {
@@ -30,7 +34,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView }) => {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+      <nav className="sticky top-0 z-50 w-full bg-white/90 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
@@ -39,33 +43,63 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView }) => {
               onClick={() => handleNavClick('home')}
             >
               <img src="/favicon.png" alt="Logo" className="w-16 h-16 rounded-lg" />
-              <span className="font-bold text-xl tracking-tight text-slate-800">
+              <span className="font-bold text-xl tracking-tight text-slate-800 dark:text-slate-100">
                 Vox<span className="text-brand-600">Factum</span>
               </span>
             </div>
 
-            {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-8">
-              {navLinks.map((link) => (
-                <button
-                  key={link.id}
-                  onClick={() => handleNavClick(link.id)}
-                  className={`${
-                    currentView === link.id
-                      ? 'text-brand-600 font-semibold'
-                      : 'text-slate-600 hover:text-brand-500'
-                  } transition-colors duration-200 text-sm font-medium`}
-                >
-                  {link.label}
-                </button>
-              ))}
+            {/* Desktop Menu - minimal pill style inspired by Vibe */}
+            <div className="hidden md:flex items-center space-x-5">
+              <nav
+                className="flex items-center gap-2 px-2 py-1.5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm"
+                aria-label="Navigasi utama"
+              >
+                {navLinks.map((link) => {
+                  const isActive = currentView === link.id;
+                  return (
+                    <button
+                      key={link.id}
+                      onClick={() => handleNavClick(link.id)}
+                      className={`group relative flex items-center justify-start h-11 rounded-xl overflow-hidden transition-all duration-300 text-xs font-medium tracking-wide
+                        w-12 md:w-14 md:group-hover:w-40 ${isActive ? 'md:w-40' : ''}
+                        ${
+                          isActive
+                            ? 'bg-brand-600 text-white shadow-md'
+                            : 'text-slate-500 dark:text-slate-300 hover:text-white hover:bg-brand-500/95 hover:shadow-md'
+                        }
+                      `}
+                    >
+                      <span className="flex items-center justify-center pl-3">
+                        {link.icon}
+                      </span>
+                      <span
+                        className={`ml-2 pr-4 whitespace-nowrap opacity-0 translate-x-2 transition-all duration-300
+                          group-hover:opacity-100 group-hover:translate-x-0
+                          ${isActive ? 'opacity-100 translate-x-0' : ''}
+                        `}
+                      >
+                        {link.label}
+                      </span>
+                    </button>
+                  );
+                })}
+              </nav>
+
+              {/* Theme Toggle */}
+              <button
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                className="p-2 rounded-full border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/70 text-slate-600 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+                aria-label="Toggle dark mode"
+              >
+                {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+              </button>
             </div>
 
-            {/* Mobile Menu Button */}
-            <div className="flex md:hidden">
+            {/* Mobile Menu Button only */}
+            <div className="flex items-center gap-2 md:hidden">
               <button
                 onClick={() => setIsOpen(true)}
-                className="text-slate-600 hover:text-brand-600 p-2 focus:outline-none"
+                className="text-slate-800 dark:text-white hover:text-brand-600 dark:hover:text-brand-400 p-2 focus:outline-none"
                 aria-label="Open Menu"
               >
                 <Menu size={24} />
@@ -96,13 +130,22 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView }) => {
                 <img src="/favicon.png" alt="Logo" className="w-16 h-16 rounded-md" />
                 <span className="font-bold text-lg text-slate-800">Menu</span>
              </div>
-            <button 
-              onClick={() => setIsOpen(false)}
-              className="text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full hover:bg-red-50"
-              aria-label="Close Menu"
-            >
-              <X size={24} />
-            </button>
+             <div className="flex items-center gap-2">
+               <button
+                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                 className="p-2 rounded-full border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/70 text-slate-600 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+                 aria-label="Toggle dark mode"
+               >
+                 {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+               </button>
+               <button 
+                 onClick={() => setIsOpen(false)}
+                 className="text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full hover:bg-red-50"
+                 aria-label="Close Menu"
+               >
+                 <X size={24} />
+               </button>
+             </div>
           </div>
 
           {/* Drawer Links */}
@@ -113,7 +156,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView }) => {
                 onClick={() => handleNavClick(link.id)}
                 className={`group flex items-center justify-between w-full text-left px-4 py-3.5 rounded-xl text-base font-medium transition-all ${
                   currentView === link.id
-                    ? 'bg-brand-50 text-brand-700 shadow-sm ring-1 ring-brand-100'
+                    ? 'bg-accent-500 text-white shadow-sm ring-1 ring-accent-500/60'
                     : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                 }`}
               >
@@ -135,6 +178,35 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView }) => {
               &copy; {new Date().getFullYear()} Nizar.AI Portfolio
             </p>
           </div>
+      </div>
+
+      {/* Single Floating Animated Search Bar (bottom-right) */}
+      <div className="floating-search-wrapper text-slate-700 dark:text-slate-100">
+        <form
+          className="floating-search-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            setView('search');
+          }}
+        >
+          <label htmlFor="floating-search" className="floating-search-label">
+            Cari
+          </label>
+          <input
+            id="floating-search"
+            type="search"
+            value={searchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setView('search');
+            }}
+            placeholder=" "
+            pattern=".*\S.*"
+            required
+            className="floating-search-input"
+          />
+          <span className="floating-search-caret" />
+        </form>
       </div>
     </>
   );

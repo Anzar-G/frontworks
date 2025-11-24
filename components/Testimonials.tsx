@@ -5,11 +5,11 @@ import { Testimonial } from '../types';
 
 const Testimonials: React.FC = () => {
   return (
-    <section className="py-20 bg-white border-t border-slate-100">
+    <section className="py-20 bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-base text-brand-600 font-semibold tracking-wide uppercase">Testimoni</h2>
-          <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          <h2 className="text-base text-brand-600 dark:text-brand-400 font-semibold tracking-wide uppercase">Testimoni</h2>
+          <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
             Kata Mereka Tentang Saya
           </p>
         </div>
@@ -42,9 +42,9 @@ const Testimonials: React.FC = () => {
 };
 
 const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }) => (
-  <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 h-full flex flex-col relative">
-    <Quote className="absolute top-6 right-6 text-brand-200" size={32} />
-    <p className="text-slate-600 text-sm leading-relaxed italic mb-6 flex-grow relative z-10">
+  <div className="bg-slate-50 dark:bg-slate-900 p-6 rounded-2xl border border-slate-100 dark:border-slate-700 h-full flex flex-col relative">
+    <Quote className="absolute top-6 right-6 text-brand-200/80" size={32} />
+    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed italic mb-6 flex-grow relative z-10">
       "{testimonial.quote}"
     </p>
     <div className="flex items-center gap-4 mt-auto">
@@ -54,7 +54,7 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }
         className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm"
       />
       <div>
-        <h4 className="font-bold text-slate-900 text-sm">{testimonial.name}</h4>
+        <h4 className="font-bold text-slate-900 dark:text-white text-sm">{testimonial.name}</h4>
         <p className="text-xs text-brand-600 font-medium">{testimonial.role}, {testimonial.company}</p>
       </div>
     </div>

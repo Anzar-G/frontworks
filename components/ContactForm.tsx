@@ -139,28 +139,28 @@ const ContactForm: React.FC<ContactFormProps> = ({ initialServiceType }) => {
   const isBudgetDisabled = PRICING_PACKAGES.some(pkg => pkg.name === formData.serviceType);
 
   return (
-    <section className="py-20 bg-slate-50" id="contact">
+    <section className="py-20 bg-slate-50 dark:bg-slate-950 transition-colors" id="contact">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-slate-900">Mulai Proyek Anda</h2>
-          <p className="mt-4 text-lg text-slate-500">
+          <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white">Mulai Proyek Anda</h2>
+          <p className="mt-4 text-lg text-slate-500 dark:text-slate-300">
             Isi formulir di bawah ini untuk konsultasi awal. Tombol WhatsApp akan muncul setelah data tervalidasi.
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-100 dark:border-slate-800">
           {!isSubmitted ? (
             <form onSubmit={handleSubmit} className="p-8 sm:p-10 space-y-6">
               
               {/* Name Field */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Nama Lengkap *</label>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Nama Lengkap *</label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg border ${errors.name ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 focus:ring-brand-200'} focus:outline-none focus:ring-4 transition-all`}
+                  className={`w-full px-4 py-3 rounded-lg border ${errors.name ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 dark:border-slate-600 focus:ring-brand-200'} bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-4 transition-all`}
                   placeholder="Masukkan nama anda"
                 />
                 {errors.name && <p className="mt-1 text-sm text-red-500 flex items-center gap-1"><AlertCircle size={14}/> {errors.name}</p>}
@@ -168,13 +168,13 @@ const ContactForm: React.FC<ContactFormProps> = ({ initialServiceType }) => {
 
               {/* Email Field */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Alamat Email *</label>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Alamat Email *</label>
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg border ${errors.email ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 focus:ring-brand-200'} focus:outline-none focus:ring-4 transition-all`}
+                  className={`w-full px-4 py-3 rounded-lg border ${errors.email ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 dark:border-slate-600 focus:ring-brand-200'} bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-4 transition-all`}
                   placeholder="nama@email.com"
                 />
                 {errors.email && <p className="mt-1 text-sm text-red-500 flex items-center gap-1"><AlertCircle size={14}/> {errors.email}</p>}
@@ -182,13 +182,13 @@ const ContactForm: React.FC<ContactFormProps> = ({ initialServiceType }) => {
 
               {/* Service Type */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Jenis Layanan *</label>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Jenis Layanan *</label>
                 <div className="relative">
                   <select
                     name="serviceType"
                     value={formData.serviceType}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-lg border ${errors.serviceType ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 focus:ring-brand-200'} focus:outline-none focus:ring-4 transition-all appearance-none bg-white`}
+                    className={`w-full px-4 py-3 rounded-lg border ${errors.serviceType ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 dark:border-slate-600 focus:ring-brand-200'} focus:outline-none focus:ring-4 transition-all appearance-none bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100`}
                   >
                     <option value="">Pilih layanan...</option>
                     {SERVICE_TYPES.map(type => (
@@ -204,7 +204,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ initialServiceType }) => {
 
               {/* Budget (Auto-filled or Custom) */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">
                   {isBudgetDisabled ? 'Harga Paket (Otomatis)' : 'Estimasi Anggaran *'}
                 </label>
                 <input
@@ -213,8 +213,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ initialServiceType }) => {
                   value={formData.budget}
                   onChange={handleChange}
                   disabled={isBudgetDisabled}
-                  className={`w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-4 focus:ring-brand-200 transition-all ${
-                    isBudgetDisabled ? 'bg-slate-100 text-slate-500 cursor-not-allowed font-semibold' : 'bg-white text-slate-900'
+                  className={`w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none focus:ring-4 focus:ring-brand-200 transition-all ${
+                    isBudgetDisabled ? 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 cursor-not-allowed font-semibold' : 'bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100'
                   }`}
                   placeholder={isBudgetDisabled ? "Pilih layanan dahulu..." : "Contoh: Rp 5.000.000 - Rp 10.000.000"}
                 />
@@ -223,20 +223,20 @@ const ContactForm: React.FC<ContactFormProps> = ({ initialServiceType }) => {
 
               {/* Description */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Deskripsi Kebutuhan *</label>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Deskripsi Kebutuhan *</label>
                 <textarea
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
                   rows={4}
-                  className={`w-full px-4 py-3 rounded-lg border ${errors.description ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 focus:ring-brand-200'} focus:outline-none focus:ring-4 transition-all`}
+                  className={`w-full px-4 py-3 rounded-lg border ${errors.description ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 dark:border-slate-600 focus:ring-brand-200'} bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-4 transition-all`}
                   placeholder="Ceritakan detail proyek atau masalah yang ingin diselesaikan..."
                 ></textarea>
                 {errors.description && <p className="mt-1 text-sm text-red-500 flex items-center gap-1"><AlertCircle size={14}/> {errors.description}</p>}
               </div>
 
               {/* Terms & Conditions Checkbox */}
-              <div className="flex items-start gap-3 bg-slate-50 p-4 rounded-lg border border-slate-200">
+              <div className="flex items-start gap-3 bg-slate-50 dark:bg-slate-900 p-4 rounded-lg border border-slate-200 dark:border-slate-700">
                 <div className="flex items-center h-5 mt-0.5">
                   <input
                     id="form-terms"
@@ -251,10 +251,10 @@ const ContactForm: React.FC<ContactFormProps> = ({ initialServiceType }) => {
                   />
                 </div>
                 <div className="text-sm">
-                  <label htmlFor="form-terms" className="font-medium text-slate-700 cursor-pointer select-none">
+                  <label htmlFor="form-terms" className="font-medium text-slate-700 dark:text-slate-200 cursor-pointer select-none">
                     Saya telah membaca & menyetujui Syarat & Ketentuan
                   </label>
-                  <p className="text-xs text-slate-500 mt-1">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                     Dengan mengirim formulir ini, Anda menyetujui semua kebijakan yang berlaku dalam pengerjaan proyek.
                   </p>
                   <button
@@ -281,8 +281,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ initialServiceType }) => {
               <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <CheckCircle className="text-green-600 w-10 h-10" />
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-3">Terima Kasih, {formData.name}!</h3>
-              <p className="text-slate-600 mb-8">
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">Terima Kasih, {formData.name}!</h3>
+              <p className="text-slate-600 dark:text-slate-300 mb-8">
                 Formulir anda telah berhasil divalidasi. Silakan klik tombol di bawah untuk melanjutkan diskusi langsung via WhatsApp dengan data yang sudah terisi.
               </p>
               

@@ -16,17 +16,17 @@ const Pricing: React.FC<PricingProps> = ({ onSelectPackage }) => {
   };
 
   return (
-    <section className="py-20 bg-slate-50 border-t border-slate-200">
+    <section className="py-20 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header Section */}
         <div className="text-center mb-12">
-          <h2 className="text-base text-brand-600 font-semibold tracking-wide uppercase">Paket Jasa</h2>
-          <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          <h2 className="text-base text-brand-600 dark:text-brand-400 font-semibold tracking-wide uppercase">Paket Jasa</h2>
+          <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
             Pengembangan Web - Front-end Only 🎨
           </p>
-          <div className="mt-4 max-w-3xl text-lg text-slate-500 mx-auto bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-            <p className="font-medium text-slate-700 mb-2">Fokus Kami:</p>
+          <div className="mt-4 max-w-3xl text-lg text-slate-500 dark:text-slate-300 mx-auto bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+            <p className="font-medium text-slate-700 dark:text-slate-100 mb-2">Fokus Kami:</p>
             <p className="leading-relaxed">
               Spesialis dalam menciptakan tampilan (UI) dan pengalaman pengguna (UX) yang memukau, responsif, dan interaktif menggunakan teknologi <em>front-end</em> modern (React, Next.js). Solusi ideal bagi Anda yang sudah memiliki API <em>back-end</em> atau membutuhkan visualisasi data tanpa pengembangan server-side kustom.
             </p>
@@ -38,7 +38,7 @@ const Pricing: React.FC<PricingProps> = ({ onSelectPackage }) => {
           {PRICING_PACKAGES.map((pkg) => (
             <div 
               key={pkg.id} 
-              className={`relative flex flex-col p-6 md:p-8 bg-white rounded-2xl transition-all duration-300 ${
+              className={`relative flex flex-col p-6 md:p-8 bg-white dark:bg-slate-900 rounded-2xl transition-all duration-300 ${
                 pkg.isPopular 
                   ? 'border-2 border-brand-500 shadow-2xl z-10' 
                   : 'border border-slate-200 shadow-sm'
@@ -54,8 +54,8 @@ const Pricing: React.FC<PricingProps> = ({ onSelectPackage }) => {
 
               {/* Card Header */}
               <div className="mb-4">
-                <h3 className="text-xl font-bold text-slate-900">{pkg.name}</h3>
-                <div className="mt-4 flex items-baseline text-slate-900">
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white">{pkg.name}</h3>
+                <div className="mt-4 flex items-baseline text-slate-900 dark:text-slate-100">
                   <span className="text-2xl font-extrabold tracking-tight">
                     {pkg.price}
                   </span>
@@ -75,14 +75,14 @@ const Pricing: React.FC<PricingProps> = ({ onSelectPackage }) => {
                 ${expandedPackageId === pkg.id ? 'block' : 'hidden'} 
                 md:block flex-1 transition-all duration-300 ease-in-out
               `}>
-                <p className="text-sm text-slate-500 mb-6">{pkg.description}</p>
+                <p className="text-sm text-slate-500 dark:text-slate-300 mb-6">{pkg.description}</p>
                 <ul className="space-y-4 mb-8">
                   {pkg.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start">
                       <div className="flex-shrink-0 mt-0.5">
                         <Check className="h-4 w-4 text-green-500" />
                       </div>
-                      <p className="ml-3 text-sm text-slate-600">{feature}</p>
+                      <p className="ml-3 text-sm text-slate-600 dark:text-slate-300">{feature}</p>
                     </li>
                   ))}
                 </ul>
@@ -93,7 +93,7 @@ const Pricing: React.FC<PricingProps> = ({ onSelectPackage }) => {
                 className={`w-full py-4 px-6 rounded-xl font-bold text-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 mt-auto ${
                   pkg.isPopular
                     ? 'bg-brand-600 text-white hover:bg-brand-700 shadow-lg shadow-brand-500/30'
-                    : 'bg-slate-50 text-slate-900 hover:bg-slate-100 border border-slate-200'
+                    : 'bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600'
                 }`}
               >
                 {pkg.buttonText}
@@ -104,24 +104,24 @@ const Pricing: React.FC<PricingProps> = ({ onSelectPackage }) => {
         
         {/* Domain & Hosting Disclaimer */}
         <div className="max-w-4xl mx-auto mb-12 md:mb-0">
-          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6 md:p-8">
+          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-500/40 rounded-2xl p-6 md:p-8">
             <div className="flex items-center gap-3 mb-4">
-              <div className="bg-amber-100 p-2 rounded-lg text-amber-600">
+              <div className="bg-amber-100 dark:bg-amber-500/20 p-2 rounded-lg text-amber-600">
                 <Server size={24} />
               </div>
-              <h3 className="text-lg font-bold text-slate-800">
+              <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100">
                 Penting: Perihal Domain & Hosting
               </h3>
             </div>
             
             <div className="grid md:grid-cols-3 gap-6">
               {HOSTING_INFO.map((info, idx) => (
-                <div key={idx} className="bg-white/60 p-4 rounded-xl border border-amber-100">
-                  <h4 className="font-bold text-slate-800 text-sm mb-2 flex items-center gap-2">
+                <div key={idx} className="bg-white/60 dark:bg-slate-900/80 p-4 rounded-xl border border-amber-100 dark:border-amber-500/40">
+                  <h4 className="font-bold text-slate-800 dark:text-slate-100 text-sm mb-2 flex items-center gap-2">
                     <Info size={14} className="text-amber-500" />
                     {info.title}
                   </h4>
-                  <p className="text-xs text-slate-600 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                     {info.desc}
                   </p>
                 </div>

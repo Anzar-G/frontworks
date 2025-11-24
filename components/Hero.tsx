@@ -137,7 +137,7 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 text-brand-800 text-xs font-semibold tracking-wide uppercase">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-500/10 text-accent-500 text-xs font-semibold tracking-wide uppercase">
               <span className="w-2 h-2 rounded-full bg-brand-600 animate-pulse"></span>
               AI Engineer & Frontend Expert
             </div>

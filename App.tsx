@@ -1,9 +1,10 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import Portfolio from './components/Portfolio';
+import SearchResults from './components/SearchResults';
 import Pricing from './components/Pricing';
 import Testimonials from './components/Testimonials';
 import About from './components/About';
@@ -14,10 +15,30 @@ import TermsModal from './components/TermsModal';
 import { ViewState } from './types';
 import { MessageSquare } from 'lucide-react';
 
+type Theme = 'light' | 'dark';
+
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<ViewState>('home');
   const [isTermsOpen, setIsTermsOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === 'undefined') return 'dark';
+    const stored = window.localStorage.getItem('theme');
+    if (stored === 'light' || stored === 'dark') return stored;
+    // Default ke dark mode jika belum ada preferensi yang tersimpan
+    return 'dark';
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    window.localStorage.setItem('theme', theme);
+  }, [theme]);
 
   // Handle flow: Select Package -> Open Terms Modal -> If Accepted, Go to Contact
   const handlePackageSelect = (pkgName: string) => {
@@ -56,7 +77,7 @@ const App: React.FC = () => {
               <Pricing onSelectPackage={handlePackageSelect} />
             </FadeInSection>
             <FadeInSection delay={100}>
-              <About withTopGradient />
+              <About />
             </FadeInSection>
             <FadeInSection delay={100}>
               <Testimonials />
@@ -69,7 +90,9 @@ const App: React.FC = () => {
       case 'services':
         return <Services />;
       case 'portfolio':
-        return <Portfolio />;
+        return <Portfolio searchQuery={searchQuery} />;
+      case 'search':
+        return <SearchResults query={searchQuery} />;
       case 'about':
         return <About />;
       case 'contact':
@@ -80,8 +103,15 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-sans selection:bg-brand-500 selection:text-white pb-20 md:pb-0 relative">
-      <Navbar currentView={currentView} setView={setCurrentView} />
+    <div className="min-h-screen flex flex-col font-sans selection:bg-brand-500 selection:text-white pb-20 md:pb-0 relative bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50 transition-colors duration-300">
+      <Navbar 
+        currentView={currentView} 
+        setView={setCurrentView} 
+        theme={theme} 
+        setTheme={setTheme}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
       <main className="flex-grow">
         {renderContent()}
       </main>

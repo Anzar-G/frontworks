@@ -16,7 +16,7 @@ const About: React.FC<AboutProps> = ({ withTopGradient = false }) => {
   ];
 
   return (
-    <section className="py-20 bg-white relative overflow-hidden">
+    <section className="py-20 bg-white dark:bg-slate-950 relative overflow-hidden transition-colors">
       {withTopGradient && (
         <div
           className="pointer-events-none absolute left-0 top-0 w-full h-32 z-30"
@@ -48,18 +48,18 @@ const About: React.FC<AboutProps> = ({ withTopGradient = false }) => {
 
           {/* Text Content */}
           <div>
-            <h2 className="text-3xl font-extrabold text-slate-900 sm:text-4xl mb-6">
+            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white sm:text-4xl mb-6">
               Tentang Saya
             </h2>
-            <p className="text-lg text-slate-600 mb-6 leading-relaxed">
-              Halo! Saya <span className="font-bold text-slate-900">Muhammad Nizar</span>. Perjalanan saya dimulai dari ketertarikan mendalam pada Artificial Intelligence, namun saya menyadari satu hal: <span className="italic">Model AI terhebat sekalipun tidak berguna jika sulit digunakan oleh manusia.</span>
+            <p className="text-lg text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
+              Halo! Saya <span className="font-bold text-slate-900 dark:text-slate-100">Muhammad Nizar</span>. Perjalanan saya dimulai dari ketertarikan mendalam pada Artificial Intelligence, namun saya menyadari satu hal: <span className="italic">Model AI terhebat sekalipun tidak berguna jika sulit digunakan oleh manusia.</span>
             </p>
-            <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+            <p className="text-lg text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
               Itulah mengapa saya beralih fokus menjadi Frontend Engineer dengan perspektif AI. Saya tidak hanya menulis kode UI; saya memahami logika data di belakangnya. Saya menciptakan jembatan visual yang membuat teknologi kompleks terasa sederhana.
             </p>
 
             <div className="space-y-4">
-              <h3 className="flex items-center gap-2 font-bold text-slate-900">
+              <h3 className="flex items-center gap-2 font-bold text-slate-900 dark:text-white">
                 <Terminal size={20} className="text-brand-600" />
                 Technical Arsenal
               </h3>
@@ -67,7 +67,7 @@ const About: React.FC<AboutProps> = ({ withTopGradient = false }) => {
                 {skills.map((skill, idx) => (
                   <div 
                     key={idx} 
-                    className="group flex items-center gap-2 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 hover:border-brand-300 hover:bg-brand-50 hover:text-brand-700 transition-all cursor-default shadow-sm"
+                    className="group flex items-center gap-2 px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:border-brand-300 hover:bg-brand-50 dark:hover:bg-slate-800 hover:text-brand-700 transition-all cursor-default shadow-sm"
                   >
                     <skill.icon size={16} className="text-slate-400 group-hover:text-brand-500 transition-colors" />
                     {skill.name}
