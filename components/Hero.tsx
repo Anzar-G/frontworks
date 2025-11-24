@@ -253,15 +253,7 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
                  </div>
                </div>
 
-               <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-lg shadow-xl border border-slate-100 flex items-center gap-3 animate-bounce duration-[4000ms]">
-                 <div className="bg-purple-100 p-2 rounded-full">
-                   <Database className="text-purple-600" size={20} />
-                 </div>
-                 <div>
-                   <p className="text-xs text-slate-500">Data Integration</p>
-                   <p className="font-bold text-slate-800">AI Ready</p>
-                 </div>
-               </div>
+          
 
              </div>
           </div>
