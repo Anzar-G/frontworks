@@ -1,7 +1,11 @@
 import React from 'react';
 import { Terminal, Cpu, Code2, Palette, Database, Zap } from 'lucide-react';
 
-const About: React.FC = () => {
+interface AboutProps {
+  withTopGradient?: boolean;
+}
+
+const About: React.FC<AboutProps> = ({ withTopGradient = false }) => {
   const skills = [
     { name: "JavaScript (ES6+) & TypeScript", icon: Code2 },
     { name: "React.js & Next.js Ecosystem", icon: Cpu },
@@ -13,8 +17,12 @@ const About: React.FC = () => {
 
   return (
     <section className="py-20 bg-white relative overflow-hidden">
-      {/* Gradient hitam transisi dari Hero */}
-      <div className="pointer-events-none absolute left-0 top-0 w-full h-32 z-30" style={{background: 'linear-gradient(to bottom, #111 0%, rgba(0,0,0,0) 100%)'}} />
+      {withTopGradient && (
+        <div
+          className="pointer-events-none absolute left-0 top-0 w-full h-32 z-30"
+          style={{ background: 'linear-gradient(to bottom, #111 0%, rgba(0,0,0,0) 100%)' }}
+        />
+      )}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
           

@@ -1,11 +1,19 @@
 import React from 'react';
 import { SERVICES } from '../constants';
 
-const Services: React.FC = () => {
+interface ServicesProps {
+  withTopGradient?: boolean;
+}
+
+const Services: React.FC<ServicesProps> = ({ withTopGradient = false }) => {
   return (
     <section className="py-20 bg-white relative overflow-hidden" id="services">
-      {/* Gradient hitam transisi dari Hero */}
-      <div className="pointer-events-none absolute left-0 top-0 w-full h-32 z-30" style={{background: 'linear-gradient(to bottom, #111 0%, rgba(0,0,0,0) 100%)'}} />
+      {withTopGradient && (
+        <div
+          className="pointer-events-none absolute left-0 top-0 w-full h-32 z-30"
+          style={{ background: 'linear-gradient(to bottom, #111 0%, rgba(0,0,0,0) 100%)' }}
+        />
+      )}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-base text-brand-600 font-semibold tracking-wide uppercase">Layanan</h2>

@@ -115,22 +115,20 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
       {/* Gradient transition ke section berikutnya */}
   {/* Gradient overlay menutupi section di bawah Hero */}
   <div className="pointer-events-none fixed left-0 bottom-0 w-full h-[40vh] z-[9999]" style={{background: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, #111 100%)', pointerEvents: 'none'}} />
-      {/* FloatingLines background animasi */}
-  <div style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 1 }}>
-        <FloatingLines 
-          linesGradient={['#e947f5', '#2f4ba2']}
-          enabledWaves={['top', 'middle', 'bottom']}
-          lineCount={[5, 8, 10]} // lebih sedikit garis
-          lineDistance={[10, 8, 6]} // jarak lebih besar
-          topWavePosition={{ x: 10.0, y: 0.5, rotate: -0.4 }}
-          middleWavePosition={{ x: 5.0, y: 0.0, rotate: 0.2 }}
-          bendRadius={5.0}
-          bendStrength={-0.5}
-          interactive={false} // matikan interaktif
-          parallax={false} // matikan parallax
-        />
-      </div>
-
+      {/* FloatingLines background animasi (versi lebih soft) */}
+	  <div style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 1 }}>
+		<FloatingLines 
+		  linesGradient={['#e947f5', '#2f4ba2']}
+		  enabledWaves={['middle']}
+		  lineCount={[4]} // lebih sedikit garis
+		  lineDistance={[14]} // jarak sedikit lebih renggang
+		  topWavePosition={{ x: 10.0, y: 0.5, rotate: -0.4 }}
+		  middleWavePosition={{ x: 4.5, y: 0.0, rotate: 0.15 }}
+		  animationSpeed={0.6}
+		  interactive={false}
+		  parallax={false}
+		/>
+	  </div>
       {/* Decorative blobs */}
       <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-brand-200 opacity-30 blur-3xl filter animate-pulse"></div>
       <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 rounded-full bg-accent-200 opacity-30 blur-3xl filter"></div>

@@ -47,7 +47,7 @@ const App: React.FC = () => {
               <Hero setView={setCurrentView} />
             </FadeInSection>
             <FadeInSection delay={100}>
-              <Services />
+              <Services withTopGradient />
             </FadeInSection>
             <FadeInSection delay={100}>
               <Portfolio />
@@ -56,7 +56,7 @@ const App: React.FC = () => {
               <Pricing onSelectPackage={handlePackageSelect} />
             </FadeInSection>
             <FadeInSection delay={100}>
-              <About />
+              <About withTopGradient />
             </FadeInSection>
             <FadeInSection delay={100}>
               <Testimonials />
