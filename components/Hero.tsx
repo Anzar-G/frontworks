@@ -9,29 +9,102 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ setView }) => {
   const [isShareOpen, setIsShareOpen] = useState(false);
 
-  const handleShare = (platform: string) => {
-  const url = window.location.href;
-  const text = "Cek portfolio Muhammad Nizar, AI Frontend Engineer keren ini!";
-    const encodedUrl = encodeURIComponent(url);
-    const encodedText = encodeURIComponent(text);
+  // Share message & URL
+  // Format pesan sesuai rekomendasi
+  const shareUrl = "https://frontworks.vercel.app";
+  // Versi 1 - Formal & Profesional (WhatsApp)
+  const shareFormal = `Jasa Frontend Web Development Profesional - Voxfactum\n\nWujudkan website impian Anda dengan tampilan yang memukau dan performa optimal.\n\nKeunggulan Kami:\n- Desain Modern & User-Friendly\n- Responsif di Semua Perangkat\n- Loading Cepat & Teroptimasi\n- Clean Code & Well-Structured\n- Unlimited Revisi\n\nKonsultasi Gratis & Estimasi Harga Transparan.\n\n${shareUrl}`;
+  // Versi 2 - Singkat & Padat (Copy Link)
+  const shareShort = `Voxfactum - Jasa Pembuatan Website Frontend Profesional\n\nKami menghadirkan solusi website modern dengan desain menarik, responsif, dan performa tinggi. Clean code, unlimited revisi, dan konsultasi gratis.\n\nHubungi kami sekarang:\n${shareUrl}`;
+  // Versi 3 - Value Proposition (Instagram)
+  const shareValue = `Butuh Website Profesional untuk Bisnis Anda?\n\nVoxfactum hadir sebagai solusi frontend web development yang mengutamakan kualitas dan kepuasan klien.\n\nYang Anda Dapatkan:\n- Desain modern dan menarik\n- Tampilan responsif (mobile, tablet, desktop)\n- Performa loading cepat\n- Kode terstruktur dan berkualitas\n- Revisi hingga puas\n- Konsultasi gratis tanpa biaya\n\nWujudkan website impian Anda bersama kami.\n\nInfo lengkap: ${shareUrl}`;
+  // Versi 4 - Corporate Style (Facebook)
+  const shareCorporate = `Voxfactum - Professional Frontend Web Development Services\n\nKami menyediakan layanan pembuatan website frontend yang profesional dengan fokus pada user experience dan visual excellence.\n\nLayanan meliputi:\nLanding page, company profile, portfolio website, product showcase, dan UI implementation dari design.\n\nTeknologi: HTML5, CSS3, JavaScript, React, Vue, Tailwind CSS, Bootstrap\n\nKonsultasi gratis. Harga fleksibel sesuai kebutuhan.\n\n${shareUrl}`;
 
+  // Notifikasi custom
+  const showNotification = (message: string) => {
+    const notification = document.createElement('div');
+    notification.textContent = message;
+    notification.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #667eea;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      z-index: 10000;
+      animation: slideIn 0.3s ease-out;
+    `;
+    document.body.appendChild(notification);
+    setTimeout(() => {
+      notification.style.animation = 'slideOut 0.3s ease-out';
+      setTimeout(() => notification.remove(), 300);
+    }, 3000);
+  };
+
+  // Inject animation CSS (once)
+  React.useEffect(() => {
+    if (!document.getElementById('share-notif-anim')) {
+      const style = document.createElement('style');
+      style.id = 'share-notif-anim';
+      style.textContent = `
+        @keyframes slideIn {
+          from { transform: translateX(400px); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+          from { transform: translateX(0); opacity: 1; }
+          to { transform: translateX(400px); opacity: 0; }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }, []);
+
+  // Handler share
+  const handleShare = (platform: string) => {
     switch (platform) {
-      case 'whatsapp':
-        window.open(`https://wa.me/?text=${encodedText}%20${encodedUrl}`, '_blank');
+      case 'whatsapp': {
+        const message = shareFormal;
+        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
         break;
-      case 'facebook':
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, '_blank');
+      }
+      case 'instagram': {
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+          window.location.href = 'instagram://story-camera';
+          setTimeout(() => {
+            showNotification('Silakan screenshot halaman ini dan bagikan ke Instagram Story Anda!\n\nAtau klik "Copy Link" untuk menyalin link.');
+          }, 2000);
+        } else {
+          showNotification('📱 Instagram Story hanya bisa dibagikan dari HP.\n\nSilakan:\n1. Buka website ini di HP\n2. Screenshot halaman ini\n3. Bagikan ke Instagram Story');
+        }
         break;
-      case 'instagram':
-        // Web API cannot directly share to Instagram Stories reliably across all devices.
-        // Fallback: Copy link and guide user.
-        navigator.clipboard.writeText(`${text} ${url}`);
-        alert("Link dan teks disalin! Silakan buka Instagram untuk membuat Story.");
+      }
+      case 'facebook': {
+        const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareCorporate)}`;
+        window.open(facebookUrl, '_blank', 'width=600,height=400');
         break;
-      case 'copy':
-        navigator.clipboard.writeText(url);
-        alert("Link berhasil disalin ke clipboard!");
+      }
+      case 'copy': {
+        const message = shareShort;
+        navigator.clipboard.writeText(message).then(() => {
+          showNotification('✅ Link berhasil disalin!');
+        }).catch(() => {
+          // Fallback untuk browser lama
+          const textarea = document.createElement('textarea');
+          textarea.value = message;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          showNotification('✅ Link berhasil disalin!');
+        });
         break;
+      }
     }
     setIsShareOpen(false);
   };
