@@ -88,40 +88,48 @@ export const TESTIMONIALS: Testimonial[] = [
     name: 'Rina Kartika',
     role: 'Pemilik Toko Online Fashion',
     company: '',
-    quote: 'Websitenya bagus banget dan loading-nya cepat! Pelanggan jadi lebih tertarik buat belanja. Prosesnya juga gampang, dijelasin step by step. Recommended deh buat yang mau bikin website toko online!.',
-    avatar: 'https://i.pravatar.cc/150?u=andi'
+  quote: 'Websitenya bagus banget dan loading-nya cepat! Pelanggan jadi lebih tertarik buat belanja. Prosesnya juga gampang, dijelasin step by step. Recommended deh buat yang mau bikin website toko online!',
+    avatar: 'https://i.pravatar.cc/150?u=rina'
   },
   {
     id: 't2',
-    name: 'Budi Prasetyo ',
+    name: 'Budi Prasetyo',
     role: 'Freelance Photographer',
     company: '',
-    quote: 'Awalnya ragu mau bikin portfolio website, tapi ternyata hasilnya melebihi ekspektasi. Foto-foto jadi keliatan lebih profesional dan banyak klien yang kontak lewat website. Worth it banget!',
-    avatar: 'https://i.pravatar.cc/150?u=sarah'
+  quote: 'Awalnya ragu mau bikin portfolio website, tapi ternyata hasilnya melebihi ekspektasi. Foto-foto jadi keliatan lebih profesional dan banyak klien yang kontak lewat website. Worth it banget!',
+    avatar: 'https://i.pravatar.cc/150?u=budi'
   },
   {
     id: 't3',
-    name: '⁠Sari Melati',
+    name: 'Sari Melati',
     role: 'Guru Bahasa Inggris',
     company: '',
-    quote: 'Website untuk les privat saya sekarang terlihat lebih modern dan kredibel. Orang tua murid jadi lebih percaya dan pendaftaran meningkat. Pelayanannya juga ramah, revisi dikerjain dengan sabar.',
-    avatar: 'https://i.pravatar.cc/150?u=budi'
+  quote: 'Website untuk les privat saya sekarang terlihat lebih modern dan kredibel. Orang tua murid jadi lebih percaya dan pendaftaran meningkat. Pelayanannya juga ramah, revisi dikerjain dengan sabar.',
+    avatar: 'https://i.pravatar.cc/150?u=sari'
   },
   {
-    id: 't2',
-    name: 'Sarah Wijaya',
-    role: 'Product Manager',
-    company: 'AI Corp Global',
-    quote: 'Integrasi model machine learning ke frontend sangat mulus. User experience aplikasi kami meningkat drastis berkat sentuhan desainnya.',
-    avatar: 'https://i.pravatar.cc/150?u=sarah'
+    id: 't4',
+    name: 'Dimas Anggara',
+    role: 'Content Creator',
+    company: '',
+  quote: 'Butuh website buat portfolio dan link semua sosmed gue. Hasilnya keren, simpel, tapi tetap menarik. Gak nyesel pilih jasa ini, fast response dan komunikatif!',
+    avatar: 'https://i.pravatar.cc/150?u=dimas'
   },
   {
-    id: 't3',
-    name: 'Budi Santoso',
-    role: 'CEO',
-    company: 'SmartRetail Systems',
-    quote: 'Profesional, cepat, dan kodenya sangat rapi. Sangat direkomendasikan untuk proyek web yang membutuhkan kompleksitas tinggi namun tampilan sederhana.',
-    avatar: 'https://i.pravatar.cc/150?u=budi'
+    id: 't5',
+    name: 'Lina Wijaya',
+    role: 'Owner Kafe & Bakery',
+    company: '',
+  quote: 'Website kafe kami jadi terlihat lebih profesional. Menu dan foto produk tertata rapi, customer jadi lebih mudah liat katalog sebelum datang. Pengerjaan cepat dan hasilnya memuaskan!',
+    avatar: 'https://i.pravatar.cc/150?u=lina'
+  },
+  {
+    id: 't6',
+    name: 'Arief Rahman',
+    role: 'Mahasiswa Desain Grafis',
+    company: '',
+  quote: 'Sebagai mahasiswa dengan budget terbatas, seneng banget nemu jasa yang harganya masuk akal tapi hasilnya ga murahan. Portfolio website gue sekarang jadi lebih menarik buat lamar magang. Makasih banyak!',
+    avatar: 'https://i.pravatar.cc/150?u=arief'
   }
 ];
 

@@ -95,7 +95,7 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
                       className="fixed inset-0 z-10" 
                       onClick={() => setIsShareOpen(false)}
                     ></div>
-                    <div className="absolute left-0 sm:left-auto sm:ml-2 mt-2 w-full sm:w-64 bg-white rounded-xl shadow-xl border border-slate-100 z-20 overflow-hidden transform transition-all animate-fade-in-up origin-top-left">
+                    <div className="absolute left-0 top-full mt-2 w-full sm:left-full sm:top-0 sm:ml-2 sm:w-80 sm:-translate-y-16 bg-white rounded-xl shadow-xl border border-slate-100 z-[9999] overflow-hidden transform transition-all animate-fade-in-up origin-top-left">
                       <div className="p-3 bg-slate-50 border-b border-slate-100 flex justify-between items-center">
                         <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Share Portfolio</span>
                         <button onClick={() => setIsShareOpen(false)} className="text-slate-400 hover:text-slate-600">
