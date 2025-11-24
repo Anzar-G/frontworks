@@ -236,7 +236,7 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
           <div className="relative mt-10 md:mt-0 flex justify-center">
              <div className="relative bg-white p-2 rounded-2xl shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
                <img 
-                 src="https://picsum.photos/600/600" 
+                 src="https://i.pinimg.com/736x/04/c0/32/04c0324cc13083806e419d6785e50351.jpg" 
                  alt="AI Frontend Visualization" 
                  className="rounded-xl object-cover w-full h-auto max-w-md mx-auto"
                  loading="lazy"
