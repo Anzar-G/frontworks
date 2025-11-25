@@ -151,7 +151,7 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
                 animateOn="view"
                 sequential
                 revealDirection="start"
-                speed={120}
+                speed={180}
                 className="text-white drop-shadow-[0_2px_8px_rgba(255,255,255,0.35)]"
                 encryptedClassName="text-slate-400/70"
                 onComplete={() => setShowSecondTitle(true)}
@@ -163,7 +163,7 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
                   typingSpeed={120}
                   pauseDuration={2800}
                   deletingSpeed={90}
-                  loop={true}
+                  loop={false}
                   showCursor={true}
                   cursorCharacter="|"
                   className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-accent-500"
