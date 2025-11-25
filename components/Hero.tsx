@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import FloatingLines from './FloatingLines';
+import TextType from './TextType';
+import DecryptedText from './DecryptedText';
 import { ArrowRight, Code, Database, Share2, Facebook, Instagram, Link as LinkIcon, MessageCircle, X } from 'lucide-react';
 import { ViewState } from '../types';
 
@@ -9,6 +11,7 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ setView }) => {
   const [isShareOpen, setIsShareOpen] = useState(false);
+  const [showSecondTitle, setShowSecondTitle] = useState(false);
 
   // Share message & URL
   // Format pesan sesuai rekomendasi
@@ -143,7 +146,29 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight drop-shadow-[0_2px_8px_rgba(255,255,255,0.35)]">
-              <span className="text-white drop-shadow-[0_2px_8px_rgba(255,255,255,0.35)]">Mewujudkan Logika AI Menjadi</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-accent-500">Antarmuka Memukau</span>
+              <DecryptedText
+                text="Mewujudkan Logika AI"
+                animateOn="view"
+                sequential
+                revealDirection="start"
+                speed={120}
+                className="text-white drop-shadow-[0_2px_8px_rgba(255,255,255,0.35)]"
+                encryptedClassName="text-slate-400/70"
+                onComplete={() => setShowSecondTitle(true)}
+              />{" "}
+              {showSecondTitle && (
+                <TextType
+                  as="span"
+                  text="Menjadi Antarmuka Memukau"
+                  typingSpeed={120}
+                  pauseDuration={2800}
+                  deletingSpeed={90}
+                  loop={true}
+                  showCursor={true}
+                  cursorCharacter="|"
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-accent-500"
+                />
+              )}
             </h1>
             
             <p className="text-lg text-white max-w-2xl leading-relaxed">
