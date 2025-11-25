@@ -5,6 +5,10 @@ const styles = {
   wrapper: {
     display: 'inline-block',
     whiteSpace: 'pre-wrap',
+    // Anti-flicker / GPU optimization for animated text
+    willChange: 'opacity, transform, color',
+    transform: 'translateZ(0)',
+    backfaceVisibility: 'hidden',
   } as React.CSSProperties,
   srOnly: {
     position: 'absolute',

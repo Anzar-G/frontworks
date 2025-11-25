@@ -1,6 +1,10 @@
 .text-type {
   display: inline-block;
   white-space: pre-wrap;
+  /* Anti-flicker / GPU hints for text animations */
+  will-change: opacity, transform, color;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .text-type__cursor {
